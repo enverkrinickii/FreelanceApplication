@@ -11,9 +11,13 @@ namespace FreelanceApplication.Controllers
     {
         private ApplicationContext _context = new ApplicationContext();
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            return View(_context.FreelanceDescriptions);
+            int pageSize = 3; // количество объектов на страницу
+            IEnumerable<FreelanceDescription> descriptions = _context.FreelanceDescriptions.OrderBy(x=>x.CompanyName).Skip((page - 1) * pageSize).Take(pageSize);
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = _context.FreelanceDescriptions.Count() };
+            IndexViewModel ivm = new IndexViewModel { PageInfo = pageInfo, FreelanceDescriptions = descriptions };
+            return View(ivm);
         }
 
         public ActionResult Contact()

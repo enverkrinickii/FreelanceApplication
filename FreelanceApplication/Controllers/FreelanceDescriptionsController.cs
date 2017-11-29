@@ -16,6 +16,7 @@ namespace FreelanceApplication.Controllers
     {
         private readonly ApplicationContext _context = new ApplicationContext();
 
+        [Authorize(Roles = "freelancer")]
         public async Task<ActionResult> Index()
         {
             var id = User.Identity.GetUserId();
@@ -23,6 +24,7 @@ namespace FreelanceApplication.Controllers
             return View(await freelanceDescriptions.ToListAsync());
         }
 
+        [Authorize(Roles = "freelancer")]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace FreelanceApplication.Controllers
             return View(freelanceDescription);
         }
 
+        [Authorize(Roles = "freelancer")]
         public ActionResult Create()
         {
             ViewBag.UserId = User.Identity.GetUserId();
@@ -57,6 +60,7 @@ namespace FreelanceApplication.Controllers
             return View(freelanceDescription);
         }
 
+        [Authorize(Roles = "freelancer")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +90,7 @@ namespace FreelanceApplication.Controllers
             return View(freelanceDescription);
         }
 
+        [Authorize(Roles = "freelancer")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
