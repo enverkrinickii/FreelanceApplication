@@ -234,6 +234,7 @@
     <Content Include="Views\FreelanceDescriptions\Details.cshtml" />
     <Content Include="Views\FreelanceDescriptions\Edit.cshtml" />
     <Content Include="Views\FreelanceDescriptions\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
