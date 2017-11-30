@@ -63,6 +63,7 @@ namespace FreelanceApplication.Controllers
         [Authorize(Roles = "freelancer")]
         public async Task<ActionResult> Edit(int? id)
         {
+            ViewBag.UserId = User.Identity.GetUserId();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -72,7 +73,7 @@ namespace FreelanceApplication.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(_context.Users, "Id", "Email", freelanceDescription.UserId);
+            //ViewBag.UserId = new SelectList(_context.Users, "Id", "Email", freelanceDescription.UserId);
             return View(freelanceDescription);
         }
 
