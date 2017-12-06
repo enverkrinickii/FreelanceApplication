@@ -7,24 +7,25 @@ namespace FreelanceApplication.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Поле обязательно")]
         public string CompanyName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Поле обязательно")]
         [EmailAddress]
         public string ContactEmail { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Поле обязательно")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "Field is required")]
+        [Required(ErrorMessage = "Поле обязательно")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Field is required")]
-        [MinLength(10, ErrorMessage = "10 is min amount of characters")]
+        [Required(ErrorMessage = "Поле обязательно")]
+        [MinLength(10, ErrorMessage = "Минимальное количество символов = 10")]
         public string Description { get; set; }
 
         [Required]
+        [RegularExpression(@"[0-9,.]+",ErrorMessage = "Поле должно содержать только цифры и/или точку")]
         public string Price { get; set; }
 
         [Required]

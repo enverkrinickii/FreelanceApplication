@@ -24,6 +24,10 @@ namespace FreelanceApplication.Models
     public class IndexViewModel
     {
         public IEnumerable<FreelanceDescription> FreelanceDescriptions { get; set; }
+        public string Title { get; set; }
+        public string City { get; set; }
+        public double MinPrice { get; set; }
+        public double MaxPrice { get; set; }
         public PageInfo PageInfo { get; set; }
     }
 

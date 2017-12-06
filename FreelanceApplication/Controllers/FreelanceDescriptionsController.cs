@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -64,6 +65,7 @@ namespace FreelanceApplication.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
             ViewBag.UserId = User.Identity.GetUserId();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,7 +89,7 @@ namespace FreelanceApplication.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(_context.Users, "Id", "Email", freelanceDescription.UserId);
+            //ViewBag.UserId = new SelectList(_context.Users, "Id", "Email", freelanceDescription.UserId);
             return View(freelanceDescription);
         }
 
@@ -124,5 +126,8 @@ namespace FreelanceApplication.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
     }
 }

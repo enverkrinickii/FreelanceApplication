@@ -11,11 +11,24 @@ namespace FreelanceApplication.Controllers
     {
         private ApplicationContext _context = new ApplicationContext();
 
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(string title, string city, double? minPrice, double? maxPrice, int page = 1)
         {
-            int pageSize = 3; // количество объектов на страницу
-            IEnumerable<FreelanceDescription> descriptions = _context.FreelanceDescriptions.OrderBy(x=>x.CompanyName).Skip((page - 1) * pageSize).Take(pageSize);
-            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = _context.FreelanceDescriptions.Count() };
+            IQueryable<FreelanceDescription> fd = _context.FreelanceDescriptions;
+            if (!String.IsNullOrEmpty(title) && !title.Equals("Все"))
+            {
+                fd = fd.Where(x => x.Title == title);
+            }
+            if (!String.IsNullOrEmpty(city) && !city.Equals("Все"))
+            {
+                fd = fd.Where(p => p.City == city);
+            }
+            //if (maxPrice != 0 && minPrice != 0)
+            //{
+            //    fd = fd.Where(x => Convert.ToDouble(x.Price) <= maxPrice && Convert.ToDouble(x.Price) >= minPrice);
+            //}
+            var pageSize = 3; // количество объектов на страницу
+            IEnumerable<FreelanceDescription> descriptions = fd.OrderBy(x=>x.CompanyName).Skip((page - 1) * pageSize).Take(pageSize);
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = fd.Count() };
             IndexViewModel ivm = new IndexViewModel { PageInfo = pageInfo, FreelanceDescriptions = descriptions };
             return View(ivm);
         }
